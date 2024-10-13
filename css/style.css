@@ -1,0 +1,749 @@
+﻿@charset "utf-8";
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 2;
+}
+
+p,h1,h2,h3,h4,h5,h6,th,td,dt,dd {
+  margin-top: 0;
+  font-family: 'Noto Sans JP', 'Shippori Mincho', serif;
+}
+
+img {
+  vertical-align: bottom;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color:#ffffff;
+  font-weight:bold;
+  text-decoration: none;
+}
+
+a:hover {
+  color:#FF4759;
+}
+
+header {
+  width: 100%;
+  height: 65px;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index:1;
+  background-color:#000000
+}
+
+.logo {
+  float: left;
+  font-family: 'Noto Sans JP', 'Shippori Mincho', serif;
+  font-size:30px;
+  font-weight:bold;
+  color:#ffffff;
+  padding:0 50px;
+  text-decoration: none;
+}
+
+.logo:hover {
+  transition:all 1s;
+  color:#FF4759;
+}
+
+
+.global-nav {
+  float: right;
+}
+
+.global-nav li {
+  float: left;
+  padding: 10px 20px;
+  font-size: 20px;
+  list-style: none;
+}
+
+.global-nav li a {
+  color:#ffffff;
+  font-family: 'Noto Sans JP', 'Shippori Mincho', serif;
+}
+
+.global-nav li:hover {
+  transition:all 1s;
+}
+
+.global-nav li a:hover {
+  color:#FF4759;
+}
+
+.sns-nav {
+  float: right;
+}
+
+.sns-icon {
+  width:25px;
+  transition:all 0.2s;
+  margin-top:19px;
+}
+
+.sns-nav li {
+  float: left;
+  margin: 0 20px;
+  font-size: 20px;
+  list-style: none;
+}
+
+.sns-nav li a {
+  font-family: 'Noto Sans JP', 'Shippori Mincho', serif;
+}
+
+.sns-nav li a:hover {
+  background-color:none;
+}
+
+.sns-icon:hover {
+  transform:scale(1.5,1.5);
+}
+
+.bgm-button {
+  background-color: #F95961;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  font-weight:bold;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 20px;
+}
+
+.bgm-button:hover {
+  opacity:0.9;
+}
+
+#wrap {
+  clear: both;
+  margin-top: 120px;
+  padding: 35px 0;
+  text-align:center;
+}
+
+.content {
+  width: 960px;
+  margin: 50px auto;
+}
+
+.content h2 {
+  margin-bottom:0;
+}
+
+/* 画像を横幅いっぱいに表示するための親要素 */
+.full-width-images {
+  width: 100%; /* 横幅いっぱいに */
+  padding-top:100px;
+  margin: 0px auto; /* 中央揃えに */
+  overflow: hidden; /* 余計なスクロールバーが表示されないように */
+}
+
+/* 画像自体のスタイル */
+.full-width-images img {
+  width: 100%; /* 画像の横幅を100%に */
+  height: auto; /* アスペクト比を維持 */
+  display: block; /* 画像の周りに余白が出ないように */
+}
+
+.full-width-images .photo {
+  border: 3px solid #000000;
+  transition: filter 0.5s ease;
+  filter: brightness(0.7);
+}
+
+.photo:hover {
+  filter: brightness(1);
+  transition:all 0.6s ease;
+}
+
+
+
+
+
+
+
+
+footer {
+  color:#ffffff;
+  margin:0px;
+}
+
+footer .creater {
+  float:left;
+  padding:0 0 20px 0;
+}
+
+footer .copyright {
+  float:right;
+  padding:0 20px 40px 0;
+}
+
+#index h1 {
+  font-size: 50px;
+  line-height: 1;
+  margin-top:40px;
+  color:#000000;
+  font-family: 'Noto Sans JP', 'Shippori Mincho', serif;
+  border: none;
+}
+
+#index p {
+  font-size: 20px;
+  margin-bottom:0;
+}
+
+#works h1 {
+  font-size: 50px;
+  line-height: 1;
+  color:#ffffff;
+  font-family: 'Noto Sans JP', 'Shippori Mincho', serif;
+  margin-bottom: 20px;
+  border: none;
+}
+
+#contact h1 {
+  font-size: 50px;
+  line-height: 1;
+  color:#ffffff;
+  font-family: 'Noto Sans JP', 'Shippori Mincho', serif;
+  margin-bottom: 20px;
+  border: none;
+}
+
+.works-wrapper p {
+  font-size: 30px;
+  line-height: 0.5;
+  margin-bottom: 20px;
+}
+
+.contact-wrapper h2 {
+  font-size: 30px;
+  line-height: 0.5;
+  margin-bottom: 20px;
+}
+
+.contact-wrapper p {
+  font-size: 30px;
+  margin-top:100px;
+}
+
+#works .garally-wrapper {
+  padding:0 0 50px 0;
+  width: 960px;
+  margin: 0 auto;
+}
+
+#works .photo {
+  width:25%;
+}
+
+#works .filter {
+    background: rgba(0, 0, 0, 0);
+}
+
+.btn a {
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 20px;
+  width: 185px;
+  display: inline-block;
+  text-align: center;
+  line-height: 50px;
+  margin-top: 20px;
+  border:none;
+  transition:all 0.3s;
+}
+
+.btn a:hover {
+  text-decoration: none;
+  background-color: #ffffffd3;
+  color: #000000;
+}
+
+#index footer,
+#works footer,
+#contact footer {
+  width: 80%;
+  margin: 0 5em;
+  padding-top:40px;
+  text-align: left;
+}
+
+#index {
+}
+
+#works {
+  background-image: url(../images/bg-index.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+#contact {
+  background-image: url(../images/bg-index.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.main-center {
+  width:940px;
+  margin: 0 auto;
+}
+
+.element {
+  padding:100px 0;
+  background-image: url(../images/bg-index2.jpg);
+  background-repeat:no-repeat ;
+  background-position: center center;
+  background-size: cover;
+}
+
+.about {
+  padding:25px 0 40px 0;
+  background-image: url(../images/bg-index3.jpg);
+  background-repeat:no-repeat ;
+  background-position: center center;
+  background-size: cover;
+}
+
+.about h2 {
+  font-size:30px;
+  text-align: center;
+  margin-bottom:0;
+  line-height:1;
+  color:#ffffff;
+}
+
+.about p {
+  color:#ece8e2;
+}
+
+th {
+  width: 10em;
+  background-color: #000000;
+  padding: 12px 0;
+  border: 3px solid #000000;
+  font-size:17px;
+}
+
+td {
+  width: 40em;
+  padding: 12px 40px 12px 40px;
+  background-color: #ece8e2;
+  border: 3px solid #000000;
+  color:#000000;
+  font-size:17px;
+}
+
+table {
+  margin:0 auto;
+  border-spacing: 0;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.video-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* コンテンツを縦に並べる */
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0; /* 上下に余白を追加 */
+  background-image: url(../images/bg-index2.jpg); /* 背景画像を設定 */
+  background-size: cover; /* 背景画像をコンテナ全体にカバー */
+  background-position: center center; /* 背景画像を中央に配置 */
+}
+
+.video-title {
+  font-size: 30px; /* タイトルのフォントサイズ */
+  color: #000000; /* タイトルの文字色 */
+  text-align: center; /* 中央揃え */
+  margin-bottom: 20px; /* タイトルと動画の間に余白を追加 */
+}
+
+.video-container img {
+  width: 79%; /* 動画の幅を80%に設定 */
+  max-width: 3000px; /* 最大幅を960pxに制限 */
+  height: auto; /* アスペクト比を維持 */
+  border: 5px solid #000000; /* 動画の周りに枠線を追加 */
+}
+
+
+.contact-sns {
+  width:960px;
+  margin:0 auto;
+}
+
+#contact .btn {
+  margin:0 0 135px 0;
+}
+
+.twitter-btn {
+  float:left;
+  padding-left:200px;
+}
+
+.instagram-btn {
+  float:right;
+  padding-right:200px;
+}
+
+.clear-fix {
+  clear:  both;
+}
+
+/* readmoreに関する記述 */
+.about p {
+  text-align: center;
+  font-size: 16px;
+  color:#ffffff;
+  line-height: 2.5;
+  margin: 0;
+}
+
+#text-wrap {
+  width: 80%;
+  height: 100%;
+  display: block;
+  margin:auto;
+  padding-top: 20px;
+  max-width:3500px;
+}
+
+.hide-text {
+  display: none;
+  padding-top: 20px;
+}
+
+.hide-text h2 {
+  padding-bottom: 60px;
+}
+
+button.readmore {
+  position: relative;
+  height: 80px;
+  width: 90px;
+  margin: 20px auto;
+  display: block;
+  background-color: transparent;
+  color:#ece8e2;
+  padding-bottom: 60px;
+  border: none;
+  outline: 0;
+  transition: .5s;
+  -webkit-transition: .5s;
+}
+
+button.readmore::after {
+  content: " ";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-top: solid 3px #ece8e2;
+  border-right: solid 3px #ece8e2;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  right: 28px;
+  top: 25px;
+  transition: .5s;
+  -webkit-transition: .5s;
+}
+
+button.readmore:hover::after {
+  top: 40px;
+}
+
+.on-click {
+  color: transparent!important;
+}
+
+.on-click {
+  transform: rotate(-180deg);
+  -webkit-transform: rotate(-180deg);
+}
+/* ここまで */
+
+/* スライドショーエリア */
+.slideshow {
+  width: 100%; /* 画面幅いっぱいに */
+  position: relative;
+  overflow: hidden; /* 画像がはみ出さないようにする */
+  margin-top:65px;
+
+  /* アスペクト比を維持するために高さを調整 */
+  padding-bottom: 43%; /* 16:9のアスペクト比（高さ÷幅 = 0.5625） */
+}
+
+.slideshow img {
+  width: 100%; /* 画像の幅を100%に */
+  height: 100%; /* 高さを100%に */
+  object-fit: cover; /* コンテナに画像をフィットさせつつ、アスペクト比を保つ */
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+/* 最初の画像を表示 */
+.slideshow img:first-child {
+  display: block;
+}
+
+/* モバイル画面に対するメディアクエリ */
+@media (max-width: 768px) {
+  .slideshow {
+    padding-bottom: 75%; /* 4:3アスペクト比に変更 (高さ÷幅 = 0.75) */
+  }
+}
+
+@media (max-width: 480px) {
+  .slideshow {
+    padding-bottom: 100%; /* 1:1アスペクト比に変更 (高さ÷幅 = 1) */
+  }
+}
+
+/* スライドショーの前へ・次へボタンのスタイル */
+a.prev, a.next {
+  position: absolute;
+  top: 50%; /* ボタンをスライドショーの中央に配置 */
+  width: auto;
+  padding: 16px;
+  color: #ffffff; /* 矢印の色 */
+  font-weight: bold;
+  font-size: 24px; /* 矢印のサイズ */
+  transition: 0.6s ease;
+  text-align: center;
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.5); /* 背景を半透明に */
+  user-select: none; /* 選択不可 */
+  z-index: 0; /* 他の要素の上に表示 */
+}
+
+/* 左矢印の位置 */
+a.prev {
+  left: 10px; /* 左端に配置 */
+}
+
+/* 右矢印の位置 */
+a.next {
+  right: 10px; /* 右端に配置 */
+}
+
+/* ホバー時の矢印の効果 */
+a.prev:hover, a.next:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* ホバー時に背景を濃く */
+}
+
+/* ナビゲーションボタンが画面外にはみ出さないようにする */
+.slideshow {
+  position: relative; /* ボタンの位置指定のために相対配置にする */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+/* タグのコンテナをフレックスボックスで表示 */
+.tags-container {
+  display: flex;
+  flex-wrap: wrap; /* タグが多い場合に折り返す */
+  justify-content: center; /* タグを中央に配置 */
+  margin: 20px 0;
+  text-align: center;
+}
+
+.tag-button {
+  background-color: #000000; /* ボタンの背景色 */
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border: 3px solid #000000;
+}
+
+.tag-button:hover {
+  background-color: #ffffffd3; /* ボタンホバー時の背景色 */
+  color: #010101;
+}
+
+/* タグのコンテナが小さい画面では一列に収まらない場合の対応 */
+@media (max-width: 768px) {
+  .tags-container {
+    flex-direction: column; /* モバイル画面では縦に並べる */
+    align-items: center;
+  }
+}
+
+/* ローディング時の黒い背景が残るように修正 */
+#loading {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  z-index: 9998; /* ボタンの下に背景を表示 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ローダーのスタイル */
+.loader {
+  border: 20px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 20px solid #FF4759;
+  width: 150px;
+  height: 150px;
+  animation: spin 2s linear infinite;
+
+  /* ローダーの位置を中央にするが、ヘッダー分65pxを上にずらす */
+  position: absolute;
+  top: calc(50% - 150px); /* 50%の中央から65px上に移動 */
+  transform: translateY(-50%); /* 自身の高さを考慮して中央に */
+}
+
+/* アニメーションの定義 */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* BGM▶ONボタンのスタイル */
+.bgm-on-button {
+  position: fixed;
+  width: 192px;  /* サイズを大きく */
+  height: 192px; /* サイズを大きく */
+  border-radius: 50%;
+  background-color: #FF4759;
+  color: white;
+  font-size: 30px; /* 文字サイズを大きく */
+  font-weight: bold;
+  border: solid 2px #FF4759;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* ローディング画面より前面に表示 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-46%, -45%);
+}
+
+.bgm-on-button:hover {
+  transition:0.5s ease;
+  background-color: #ff687264;
+}
+
+
+
+.scrolling-images {
+  width: 100%;
+  overflow: hidden; /* 横スクロールバーを隠す */
+  white-space: nowrap;
+  padding: 50px 0;
+  margin-top: 50px;
+}
+
+.scrolling-container {
+  display: flex;
+  transition: transform 0.5s linear; /* スムーズなアニメーション */
+}
+
+.scrolling-container img {
+  height: 50em; /* 画像の縦の高さを設定 */
+  width: auto;
+}
+
+
+
+
+
+
+
+
+/* お問い合わせ */
+
+/* ここまで */
+
+#index #wrap {
+  background-color: transparent;
+  margin-top: 0;
+  padding: 0;
+}
+
+@media (max-width:700px) {
+  header {
+    width: 660px;
+    height: 100px;
+    left: 50%;
+    position: relative;
+    inset: 0;
+    padding:0;
+  }
+}
+
+
+/* 横幅が3500px以上のときに文字サイズを大きくする */
+@media screen and (min-width: 3500px) {
+  body, a, p, th, td, dt, dd {
+    font-size: 50px; /* 基本の文字サイズを大きく変更 */
+  }
+
+  #index p, th, td, dt, dd {
+    font-size: 50px; /* 基本の文字サイズを大きく変更 */
+  }
+
+  #index h1 {
+    font-size: 100px; /* h1のフォントサイズを大きく */
+  }
+
+  .tag-button {
+    font-size: 40px;
+  }
+
+  #index h2 {
+    font-size: 100px; /* h2のフォントサイズを大きく */
+  }
+
+  h3 {
+    font-size: 100px; /* h3のフォントサイズを大きく */
+  }
+
+  h4, h5, h6 {
+    font-size: 100px; /* h4, h5, h6のフォントサイズ */
+  }
+
+  .logo {
+    font-size: 100px; /* ロゴのフォントサイズを大きく変更 */
+  }
+
+  .global-nav li {
+    font-size: 100px; /* ナビゲーションの文字サイズ */
+  }
+  
+  header {
+    height:200px;
+  }
+}
+
