@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>dosei | 趣味用</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <!-- jQueryプラグイン（バージョンを最新に更新） -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+  <!--read more-->
+  <script>
+    $(function(){
+      $(".readmore").on("click", function() {
+          $(this).toggleClass("on-click");
+          $(".hide-text").slideToggle(1000, () => {
+            if ($(".hide-text").is(":visible")) {
+              $(".readmore").hide();  // 隠しテキストが表示されたらボタンを非表示にする
+            }
+          });
+      });
+    });
+  </script>
+  <!--read more終わり-->
+  
+  <script>
+    $(document).ready(function() {
+      let currentIndex = 0;
+      const images = $(".slideshow img");
+      const imageCount = images.length;
+  
+      // 最初の画像を表示
+      images.hide();
+      images.eq(currentIndex).show();
+  
+      // 次へ・前へボタン、または画像クリックの処理
+      function changeSlide(n) {
+        images.eq(currentIndex).fadeOut(1000); // 現在の画像をフェードアウト
+        currentIndex = (currentIndex + n + imageCount) % imageCount; // インデックスを更新
+        images.eq(currentIndex).fadeIn(1000); // 新しい画像をフェードイン
+      }
+  
+      // 自動スライド（3秒ごと）
+      setInterval(function() {
+        changeSlide(1);
+      }, 10000);
+  
+      // changeSlide関数をグローバルにアクセスできるようにする
+      window.changeSlide = changeSlide;
+    });
+  </script>
+
+<script>
+  $(document).ready(function() {
+    // リンクがクリックされた時の処理
+    $('a[href^="#"]').on('click', function(event) {
+      event.preventDefault(); // デフォルトの動作を無効化
+
+      const target = $(this.getAttribute('href')); // クリックされたリンクのhref属性からターゲットを取得
+
+      if (target.length) {
+        const offset = target.offset().top - 62; // ヘッダーの高さ65pxを引く
+
+        $('html, body').animate({
+          scrollTop: offset // スクロールする位置を調整
+        }, 0); // スクロール速度（1秒）
+      }
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    // タグデータ（各タグに対応するリンクを設定）
+    const tags = [
+      { text: "GAMES", link: "#full-width-images" },
+      { text: "WORKS", link: "#image-row" },
+      { text: "PROFILE", link: "#about" },
+      { text: "OTHERS", link: "#others" },
+    ];
+
+    // タグボタンを生成して表示
+    tags.forEach(function(tag) {
+      const button = $('<button class="tag-button"></button>').text(tag.text);
+      button.on('click', function() {
+        const target = $(tag.link);
+        if (target.length) {
+          // 65pxのヘッダー分を考慮してスクロール
+          const offset = target.offset().top - 62; // ヘッダーの高さを引く
+          $('html, body').animate({ scrollTop: offset }, 0); // スムーズスクロール
+        }
+      });
+      $('#tag-buttons').append(button);
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    // TOPリンクをクリックした時にページトップまでスクロール
+    $('a[href="#top"]').on('click', function(event) {
+      event.preventDefault(); // デフォルト動作を無効にする
+
+      // スクロール位置を調整（ヘッダーの高さ65pxを考慮）
+      $('html, body').animate({ scrollTop: 0 - 65 }, 0); // 0pxから65px引いた位置にスクロール
+    });
+  });
+</script>
+
+
+<!-- <script>
+  $(document).ready(function() {
+    const targetElements = $('.scroll-target'); // 自動スクロール対象の要素
+    let isScrolling = false;
+    let scrollTimeout;
+
+    // スクロールロック状態を保持するオブジェクト
+    const scrollLock = new Map(); // 要素ごとのスクロールロックを管理するためのMap
+
+    $(window).on('scroll', function() {
+      // スマホではスクロール処理をしない
+      if ($(window).width() <= 1300) return;
+
+      if (isScrolling) return; // スクロール中は無視
+
+      clearTimeout(scrollTimeout); // 前回のタイムアウトをクリア
+
+      scrollTimeout = setTimeout(function() {
+        const windowHeight = $(window).height(); // ウィンドウの高さを取得
+        const currentScrollTop = $(window).scrollTop(); // 現在のスクロール位置を取得
+        const windowCenter = currentScrollTop + windowHeight / 2; // ウィンドウの中央位置を計算
+
+        let closestElement = null;
+        let closestDistance = Infinity;
+
+        targetElements.each(function() {
+          const elementOffsetTop = $(this).offset().top; // 要素のトップ位置を取得
+          const elementHeight = $(this).outerHeight();
+          const elementCenter = elementOffsetTop + elementHeight / 2; // 要素の中央位置
+
+          // 要素がウィンドウ内に表示されていて、ロックされていない場合
+          if (elementCenter >= currentScrollTop && elementCenter <= currentScrollTop + windowHeight && !scrollLock.has(this)) {
+            const distance = Math.abs(windowCenter - elementCenter); // ウィンドウの中央と要素の中央の距離
+            if (distance < closestDistance) {
+              closestElement = $(this);
+              closestDistance = distance;
+            }
+          }
+        });
+
+        // 最も近い要素が見つかった場合、その要素を中央にスクロール
+        if (closestElement) {
+          isScrolling = true;
+          const elementOffsetTop = closestElement.offset().top;
+          const elementHeight = closestElement.outerHeight();
+          let scrollOffset = elementOffsetTop - (windowHeight / 2) + elementHeight / 2;
+
+          // 固定ヘッダーがある場合の考慮（65pxを引く）
+          $('html, body').animate(
+            { scrollTop: scrollOffset - 35 }, // 65pxのヘッダー分を考慮してスクロール
+            0,
+            function() {
+              isScrolling = false; // スクロール完了時にフラグを解除
+
+              // スクロール完了した要素に対して20秒間ロックをかける
+              scrollLock.set(closestElement[0], true); // ロックを設定
+              setTimeout(function() {
+                scrollLock.delete(closestElement[0]); // 20秒後にロックを解除
+              }, 10000); // 20秒後にロック解除
+            }
+          );
+        }
+      }, 0); // スクロール停止後200msで処理を実行
+    });
+  });
+</script> -->
+
+
+<script>
+  // BGMの再生・停止制御
+  document.addEventListener('DOMContentLoaded', function() {
+    const bgmAudio = document.getElementById('bgm-audio');
+    const bgmToggleButton = document.getElementById('bgm-toggle');
+    let isPlaying = false; // BGMの再生状態を管理
+
+    // BGMの音量を設定 (0.0 - 1.0)
+    bgmAudio.volume = 0.1; // 音量を20%に設定
+
+    // BGMトグルボタンのクリックイベント
+    bgmToggleButton.addEventListener('click', function() {
+      if (isPlaying) {
+        bgmAudio.pause(); // BGMを停止
+        bgmToggleButton.textContent = 'BGM: OFF'; // ボタンのラベルをOFFに変更
+      } else {
+        bgmAudio.play(); // BGMを再生
+        bgmToggleButton.textContent = 'BGM: ON'; // ボタンのラベルをONに変更
+      }
+      isPlaying = !isPlaying; // 再生状態を反転
+    });
+
+    // ページが読み込まれたときに最初のユーザーアクションでBGMを再生する
+    document.addEventListener('click', function() {
+      if (!isPlaying) {
+        bgmAudio.play();
+        bgmToggleButton.textContent = 'BGM: ON';
+        isPlaying = true;
+      }
+    }, { once: true }); // 最初のクリックのみでBGMを再生
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    // ボタンを表示するタイミングの設定
+    setTimeout(function() {
+      $('#bgm-on-button').fadeIn(500); // 1秒前にボタンを表示
+      
+      // 1秒後にローディングアイコンだけを消す
+      setTimeout(function() {
+        $('#loading .loader').fadeOut(100); // ローディングアイコンを消す
+      }, 400);
+    }, 500);
+
+    // ボタンをクリックしたときの動作
+    $('#bgm-on-button').on('click', function() {
+      // ボタンと背景をフェードアウト
+      $(this).fadeOut(500);
+      $('#loading').fadeOut(500, function() {
+        $(this).remove(); // 背景を完全に削除
+      });
+    });
+
+    // ドキュメント全体でクリックを検知して、ボタン以外をクリックした場合も消える
+    $(document).on('click', function(event) {
+      // クリックされた要素がボタンでない場合
+      if (!$(event.target).is('#bgm-on-button')) {
+        $('#bgm-on-button').fadeOut(500);
+        $('#loading').fadeOut(500, function() {
+          $(this).remove(); // 背景を完全に削除
+        });
+      }
+    });
+  });
+</script>
+
+<script>
+$(document).ready(function() {
+  // スクロールイベントを監視
+  $(window).on('scroll', function() {
+    // readmoreボタンの位置を取得
+    var readmore = $('.readmore');
+    var readmorePosition = readmore.offset().top;  // readmoreボタンの画面上の位置
+    var windowHeight = $(window).height();  // ウィンドウの高さ
+    var scrollPosition = $(window).scrollTop() + windowHeight;  // 現在のスクロール位置（ウィンドウの下端）
+
+    // readmoreボタンが画面の下部に来たかどうかを確認
+    if (scrollPosition >= readmorePosition) {
+      // ボタンを自動的に開く
+      if (!readmore.hasClass('on-click')) {  // すでに開かれていない場合のみ実行
+        readmore.trigger('click');  // ボタンをクリック
+      }
+    }
+  });
+});
+
+</script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('myVideo');
+    
+    // 動画が表示されたら自動再生するための監視
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          video.play().catch(error => {
+            console.log('再生に失敗しました:', error); // エラーをキャッチ
+          });
+        } else {
+          video.pause();
+        }
+      });
+    }, {
+      threshold: 0.5 // 50%以上が画面に表示されたら再生
+    });
+    
+    observer.observe(video);
+  });
+</script>
+
+
+
+<script>
+  $(document).ready(function() {
+    const container = $('.scrolling-container');
+    const scrollSpeed = 1; // スクロール速度
+    let currentPosition = 0;
+
+    // コンテナ内の画像をクローンして末尾に追加することで、無限ループのように見せる
+    const clone = container.html();
+    container.append(clone);
+
+    function scrollImages() {
+      // 現在の位置を更新して右から左に移動
+      currentPosition -= scrollSpeed;
+      container.css('transform', `translateX(${currentPosition}px)`);
+
+      // スクロールがコンテナの幅を超えたらリセット
+      if (Math.abs(currentPosition) >= container[0].scrollWidth / 2) {
+        currentPosition = 0; // スクロール位置をリセット
+      }
+
+      requestAnimationFrame(scrollImages); // 次のフレームで再実行
+    }
+
+    scrollImages(); // スクロールを開始
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</head>
+<body id="index">
+  <div id="loading">
+    <div class="loader"></div>
+  </div>
+  <button id="bgm-on-button" class="bgm-on-button" style="display: none;">BGM▶ON</button>
+  <div id="top"></div>
+
+  <!--header始まり-->
+  <header>
+    <div class="logo">
+      <a href="index.html">DOSEI</a>
+    </div>
+    <nav>
+      <ul class="sns-nav">
+        <li><a target="_blank" href=""><img class="sns-icon twitter" src="twitter-brands.svg" alt="Twitter"></a></li>
+      </ul>
+      <ul class="global-nav">
+        <li><a href="#top">TOP</a></li>
+        <li><a href="#image-row">WORKS</a></li>
+        <li><a href="#about">PROFILE</a></li>
+        <li><button id="bgm-toggle" class="bgm-button">BGM: OFF</button></li> <!-- BGMトグルボタン -->
+      </ul>
+    </nav>
+  </header>
+  <!--header終わり-->
+
+  <!-- BGM用のaudioタグ -->
+  <audio id="bgm-audio" loop>
+    <source src="images/bgm.mp3" type="audio/mpeg">
+    お使いのブラウザはaudioタグをサポートしていません。
+  </audio>
+
+  <!--wrap始まり-->
+  <div id="wrap">
+    <!-- スライドショーを追加 -->
+    <div id="slideshow-container" class="slideshow">
+      <img class="photo filter-img" src="images/6.jpg" alt="minecraft" onclick="changeSlide(1)">
+      <img class="photo filter-img" src="images/12.jpg" alt="FF14_2" onclick="changeSlide(1)">
+      <img class="photo filter-img" src="images/4.jpg" alt="FF14_1" onclick="changeSlide(1)">
+      <img class="photo filter-img" src="images/11.jpg" alt="FF14_2" onclick="changeSlide(1)">
+      
+
+      <!-- 前へ・次へボタン -->
+    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+    </div>
+    <div id="element" class="element">
+    <h1>dosei #motherzero</h1>
+    <!-- タグ一覧を表示するエリアを追加 -->
+<div class="tags-container">
+<div id="tag-buttons"></div>
+<div class="scrolling-images">
+  <div class="scrolling-container">
+    <img src="images/14.jpg" alt="縦長画像1">
+    <img src="images/15.jpg" alt="縦長画像2">
+    <img src="images/16.jpg" alt="縦長画像3">
+    <img src="images/17.jpg" alt="縦長画像1">
+    <img src="images/18.jpg" alt="縦長画像2">
+    <img src="images/19.jpg" alt="縦長画像3">
+    <img src="images/14.jpg" alt="縦長画像1">
+    <img src="images/15.jpg" alt="縦長画像2">
+    <img src="images/16.jpg" alt="縦長画像3">
+    <img src="images/17.jpg" alt="縦長画像1">
+    <img src="images/18.jpg" alt="縦長画像2">
+    <img src="images/19.jpg" alt="縦長画像3">
+    <!-- 他の画像をここに追加 -->
+  </div>
+</div>
+</div>
+<div class="full-width-images">
+  <a href="https://www.foriio.com/works/1070656" target="brank">
+  <img id="full-width-images" class="photo filter-img, scroll-target" src="images/1.jpg" alt="VALORANT">
+  <img class="photo filter-img, scroll-target" src="images/2.jpg" alt="OVERWATCH2">
+</a>
+  
+<div class="full-width-images"></div>
+<h1 id="image-row">WORKS</h1>
+<a href="https://www.foriio.com/works/1070613" target="brank">
+  <img id="full-width-images" class="photo filter-img, scroll-target" src="images/7.jpg" alt="イラスト">
+</a>
+<a href="https://www.foriio.com/works/1274181" target="brank">
+  <img class="photo filter-img, scroll-target" src="images/8.jpg" alt="写真">
+</a>
+  <a href="https://www.foriio.com/works/1070656" target="brank">
+  <img class="photo filter-img, scroll-target" src="images/9.jpg" alt="ゲーム記録">
+</a>
+</div>
+
+
+
+</div>
+
+</div>
+</div>
+    <div id="about" class="about">
+      <h2>About me</h2>
+      <div id="text-wrap">
+        <div class="show-text">
+          <p>準備中<br>
+          </p>
+        </div>
+        <div class="hide-text">
+          <table class="detail">
+            <tbody>
+              <tr>
+                <th>準備中..</th>
+                <td>In preparation...
+              </tr>
+              <tr>
+                <th>準備中..</th>
+                <td>
+                  In preparation...
+                </td>
+              </tr>
+              <tr>
+                <th>準備中..</th>
+                <td>
+                  In preparation...
+                </td>
+              </tr>
+              <tr>
+                <th>準備中...</th>
+                <td>
+                  In preparation...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="readmore">READ MORE</button>
+      </div>
+    </div>
+  </div>
+  <!--wrap終わり-->
+
+  <div id="others" class="video-container">
+      <img src="images/preparetion.png">
+  </div>
+
+  <!--footer始まり-->
+  <footer>
+    <p class="creater">サイト制作者：dosei</p><br><br>
+    <p class="creater">©2024 Blizzard Entertainment, Inc. All RIGHTS RESERVED.</p><br><br>
+    <p class="copyright">©2020 - 2024 Riot Games, Inc. Riot Games, VALORANT,
+      and any associated logos are trademarks, service marks and/or registered trademarks of Riot Games, Inc.</p><p class="creater">© SQUARE ENIX</p>
+  </footer>
+  <!--footer終わり-->
+
+</body>
+</html>
